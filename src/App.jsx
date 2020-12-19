@@ -16,9 +16,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <sction className="c-section">
+        <div className="c-box">
 
-      </React.Fragment>
+        </div>
+      </sction>
     );
   }
 }
