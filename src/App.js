@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './assets/styles/style.css'
 import defaultDataset from './dataset';
 
 export default class App extends React.Component {
