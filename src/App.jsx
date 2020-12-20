@@ -13,39 +13,50 @@ export default class App extends React.Component {
       dataset: defaultDataset,  // 質問と回答のデータセット
       open: false,  // お問い合わせフォーム用のモーダルの開閉を管理
     }
+    this.selectedAnswer = this.selectAnswer.bind(this);  // コンポーネントが描画される度にselectAnswer関数が生成されるのを防ぐためにbindを行う
   }
 
-  // datasetの中身をanswersに格納する関数
-  initAnswer = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const initAnswers = initDataset.answers;
-
-    this.setState({
-      answers: initAnswers
-    });
-  }
-
-  // datasetの中身をchatsに格納する関数
-  initChats = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const chat = {
-      text: initDataset.question,
-      type: 'question'
-    }
-
-    // 現在のchatsに上で取得してきたデータセットを追加
+  // 次に表示する質問処理
+  displayNextQuestion = (nextQuestionId) => {
     const chats = this.state.chats;
-    chats.push(chat);
+    chats.push({
+      text: this.state.dataset[nextQuestionId].question,
+      type: 'question'
+    })
 
     this.setState({
-      chats: chats
-    });
+      answers: this.state.dataset[nextQuestionId].answers,
+      chats: chats,
+      currentId: nextQuestionId,
+    })
+  }
+
+  // 質問の回答処理
+  selectAnswer = (selectedAnswer, nextQuestionId) => {
+    switch(true) {
+      case (nextQuestionId === "init"):
+        this.displayNextQuestion(nextQuestionId);
+        break;
+      default :
+        const chats = this.state.chats;
+        chats.push({
+          text: selectedAnswer,
+          type: 'answer'
+        })
+
+        this.setState({
+          chats: chats
+        });
+
+        this.displayNextQuestion(nextQuestionId);
+        break;
+    }
   }
 
   // 最初に描画されたときの処理
   componentDidMount() {
-    this.initAnswer();
-    this.initChats();
+    const initAnswer = "";
+    this.selectAnswer(initAnswer, this.state.currentId);
   }
 
   render() {
@@ -53,7 +64,7 @@ export default class App extends React.Component {
       <sction className="c-section">
         <div className="c-box">
           <Chats chats={this.state.chats} />
-          <AnswersList answers={this.state.answers} />
+          <AnswersList answers={this.state.answers} select={this.selectAnswer} />
         </div>
       </sction>
     );
