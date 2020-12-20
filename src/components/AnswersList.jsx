@@ -1,10 +1,11 @@
 import React from 'react';
+import { Answer } from './index';
 
 const AnswersList = () => {
   return (
-    <React.Fragment>
-
-    </React.Fragment>
+    <div className="c-grid__answer">
+      <Answer />
+    </div>
   );
 }
 export default AnswersList;
