@@ -3,6 +3,7 @@ import {Chat} from './index';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 
+// スタイル定義
 const useStyles = makeStyles(() =>
   createStyles({
     "chats": {
@@ -15,7 +16,6 @@ const useStyles = makeStyles(() =>
 
 const Chats = (props) => {
   const classes = useStyles();
-
   return(
     <List className={classes.chats} id={"scroll-area"}>
       {props.chats.map((chat, index) => {

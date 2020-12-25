@@ -16,14 +16,17 @@ export default class App extends React.Component {
     this.selectedAnswer = this.selectAnswer.bind(this);  // コンポーネントが描画される度にselectAnswer関数が生成されるのを防ぐためにbindを行う
   }
 
-  // 次に表示する質問処理
+  /**
+   * 次の質問を表示する関数
+   * @param { string } nextQuestionId 質問文を特定する一意のid
+   */
   displayNextQuestion = (nextQuestionId) => {
     const chats = this.state.chats;
     chats.push({
       text: this.state.dataset[nextQuestionId].question,
       type: 'question'
     })
-
+    // 格stateの更新(ここで画面の状態を更新)
     this.setState({
       answers: this.state.dataset[nextQuestionId].answers,
       chats: chats,
@@ -31,14 +34,17 @@ export default class App extends React.Component {
     })
   }
 
-  // 質問の回答処理
+  /**
+   * 選択した回答によって表示を切り分ける関数
+   * @param { string } selectedAnswer 回答文
+   * @param { string } nextQuestionId 質問文を特定する一意のid
+   */
   selectAnswer = (selectedAnswer, nextQuestionId) => {
     switch(true) {
       case (nextQuestionId === "init"):
         setTimeout(() => this.displayNextQuestion(nextQuestionId), 500);
         break;
 
-      // 外部リンクに飛ばす処理
       case (/^https:*/.test(nextQuestionId)):
         const a = document.createElement("a");
         a.href = nextQuestionId;
@@ -47,12 +53,12 @@ export default class App extends React.Component {
         break;
 
       default :
+        // chatsの更新
         const chats = this.state.chats;
         chats.push({
           text: selectedAnswer,
           type: 'answer'
         })
-
         this.setState({
           chats: chats
         });
@@ -69,7 +75,7 @@ export default class App extends React.Component {
   }
 
   // 最新のチャットが見えるように、スクロール位置の頂点をスクロール領域の最下部に設定
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     const scrollArea = document.getElementById("scroll-area");
     if (scrollArea) {  // scrollAreaが存在していれば
       scrollArea.scrollTop = scrollArea.scrollHeight;

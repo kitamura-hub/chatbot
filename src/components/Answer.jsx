@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-// Material UIのスタイルを決定する関数(ここでスタイルをカスタマイズできる)
+// スタイル定義
 const useStyles = makeStyles(() =>
   createStyles({
     "button": {
@@ -17,7 +17,6 @@ const useStyles = makeStyles(() =>
     }
   }),
 );
-
 
 const Answer = (props) => {
   const classes = useStyles();

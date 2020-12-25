@@ -6,7 +6,7 @@ import NoProfile from '../assets/img/avatar.png';
 import MyProfile from '../assets/img/my-profile.jpeg';
 
 const Chat = (props) => {
-  const isQuestion = (props.type === 'question');  // 質問かどうか
+  const isQuestion = (props.type === 'question');  // 質問かどうかを判定
   const classes = isQuestion ? 'p-chat__row' : 'p-chat__reverse';
 
   return(
