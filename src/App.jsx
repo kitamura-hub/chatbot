@@ -2,6 +2,7 @@ import React from 'react';
 import './assets/styles/style.css'
 import defaultDataset from './dataset';
 import { AnswersList, Chats } from './components/index.js';
+import FormDialog from './components/Forms/FormDialog';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ export default class App extends React.Component {
       open: false,  // お問い合わせフォーム用のモーダルの開閉を管理
     }
     this.selectedAnswer = this.selectAnswer.bind(this);  // コンポーネントが描画される度にselectAnswer関数が生成されるのを防ぐためにbindを行う
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
   }
 
   /**
@@ -45,6 +48,10 @@ export default class App extends React.Component {
         setTimeout(() => this.displayNextQuestion(nextQuestionId), 500);
         break;
 
+      case (nextQuestionId === "contact"):
+        this.handleClickOpen();
+        break;
+
       case (/^https:*/.test(nextQuestionId)):
         const a = document.createElement("a");
         a.href = nextQuestionId;
@@ -68,6 +75,13 @@ export default class App extends React.Component {
     }
   }
 
+  handleClickOpen = () => {
+    this.setState({open: true});
+  };
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
   // 最初に描画されたときの処理
   componentDidMount() {
     const initAnswer = "";
@@ -88,6 +102,7 @@ export default class App extends React.Component {
         <div className="c-box">
           <Chats chats={this.state.chats} />
           <AnswersList answers={this.state.answers} select={this.selectAnswer} />
+          <FormDialog open={this.state.open} handleClose={this.handleClose} />
         </div>
       </sction>
     );
