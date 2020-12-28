@@ -26,4 +26,5 @@ yarn-error.log*
 # private-info
 src/webhookConfig.js
 .firebase
+.firebaserc
 firestore.rules
