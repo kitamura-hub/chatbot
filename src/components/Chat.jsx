@@ -3,7 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import NoProfile from '../assets/img/avatar.png';
-import MyProfile from '../assets/img/my-profile.jpeg';
+import MyProfile from '../assets/img/my-profile.jpg';
 
 const Chat = (props) => {
   const isQuestion = (props.type === 'question');  // 質問かどうかを判定
