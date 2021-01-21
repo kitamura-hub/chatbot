@@ -1,6 +1,6 @@
 <br />
 
-<h2 align="center">Chatbot App</h2>
+<h2 align="center">チャットボット</h2>
 
 <br />
 
@@ -16,7 +16,7 @@ https://chatbot-1219str.web.app/
 
 <br />
 
-## Use Technology
+## 使用技術
 
 - HTML/CSS
 - JavaScript
